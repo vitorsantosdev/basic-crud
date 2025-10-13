@@ -24,16 +24,12 @@ function App() {
       </div>
 
       <div className=''>
-        <div className='bg-gray-200 min-w-md p-4 border-1 border-gray-300 rounded-md text-start mb-2'>
-          <p>Vitor Santos</p>
-          <p>Agência Santos</p>
-          <p>+351 963 0966 155</p>
+        <div className='min-w-md p-4 border-b-1 border-gray-300 text-start mb-2'>
+          <p><b>Nome:</b> Vitor Santos | Agência Santos <b>Telefone:</b> +351 963 0966 155</p>
         </div>
 
-        <div className='bg-gray-200 min-w-md p-4 border-1 border-gray-300 rounded-md text-start'>
-          <p>Semila Nozaki</p>
-          <p>Semila Piercer</p>
-          <p>+351 988 157 447</p>
+        <div className='min-w-md p-4 border-b-1 border-gray-300 text-start mb-2'>
+          <p><b>Nome:</b> Semila Nozaki | Semila Piercer <b>Telefone:</b> +351 963 0966 155</p>
         </div>
       </div>
     </div>

@@ -35,6 +35,8 @@ function App() {
     }
   ]);
 
+  const updateUser = listUsers.length
+
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (name.trim() && business.trim() && phone.trim() && email.trim()) {
@@ -48,40 +50,60 @@ function App() {
 
   return (
 
-    <div className='flex gap-6 h-full'>
-      
-      <div className='bg-gray-200 min-w-md p-12 border-1 border-gray-100 rounded-md mb-4'>
-        <h1 className='font-bold text-black'>CRUD</h1>
-        <form className='text-start flex flex-col justify-start' onSubmit={handleSubmit}>
+    <div className='flex gap-6 justify-center h-screen bg-gray-50'>
 
-          <label className='text-black font-bold'>Nome:</label>
+      <div className='w-[30%] p-20'>
+        <h2 className='text-2xl mb-8'>Cadastrar Clientes</h2>
+
+        <form className='text-stat flex flex-col justify-start' onSubmit={handleSubmit}>
+
+          <label className='text-gray-400 text-xs font-bold'>Nome:</label>
           <input type="text" name='name' className='text-black bg-white p-3 mb-2' value={name} onChange={(e) => setName(e.target.value)} />
 
-          <label className='text-black font-bold'>Empresa:</label>
+          <label className='text-gray-400 text-xs font-bold'>Empresa:</label>
           <input type="text" name='name' className='text-black bg-white p-3 mb-2' value={business} onChange={(e) => setBusiness(e.target.value)} />
 
-          <label className='text-black font-bold'>Email:</label>
+          <label className='text-gray-400 text-xs font-bold'>Email:</label>
           <input type="text" name='email' className='text-black bg-white p-3 mb-2' value={email} onChange={(e) => setEmail(e.target.value)} />
 
-          <label className='text-black font-bold'>Telefone:</label>
+          <label className='text-gray-400 text-xs font-bold'>Telefone:</label>
           <input type="text" name='age' className='text-black bg-white p-3 mb-4' value={phone} onChange={(e) => setPhone(e.target.value)} />
 
-          <button type='submit' className='bg-blue-500 hover:bg-fuchsia-500 font-extrabold'>Cadastrar</button>
+          <button type='submit' className='bg-black hover:bg-gray-500 font-extrabold text-white p-3 rounded-full'>Cadastrar</button>
 
         </form>
       </div>
 
-      
-      <div className='text-start'>
-        <h2 className=''>Clientes</h2>
+
+      <div className='text-start w-[70%] p-20 bg-white'>
+        <h2 className='text-2xl mb-8'>Todos os Clientes (#{updateUser})</h2>
+
+        <table className='min-w-full'>
+          <thead>
+            <tr>
+              <th className='pb-3 text-start'>Nome</th>
+              <th className='pb-3 text-start'>Empresa</th>
+              <th className='pb-3 text-start'>Telefone</th>
+              <th className='pb-3 text-start'>Email</th>
+              <th className='pb-3 text-start'>Açoõs</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+            
 
         {listUsers.map((user, index) => (
-          <div key={index}>
-            <div className='w-full pb-4 pt-4 border-b-1 border-gray-100 text-start'>
-              <p><b>Nome:</b> {user.name} | {user.business} | <b>Telefone:</b> {user.phone}</p>
-            </div>
-          </div>
+            <tr key={index}>
+              <td className=' border-gray-300 pr-5 py-4'>{user.name}</td>
+              <td className=' px-4 border-gray-300 py-4'>{user.business}</td>
+              <td className=' px-4 border-gray-300 py-4'>{user.phone}</td>
+              <td className=' px-4 border-gray-300 py-4'>{user.email}</td>
+              <td className=' px-4 border-gray-300 py-4'>EDITAR / DELETAR</td>
+            </tr>
         ))}
+
+          </tbody>
+        </table>
       </div>
 
     </div>

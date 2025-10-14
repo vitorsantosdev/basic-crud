@@ -1,5 +1,6 @@
 import './App.css'
 import { useState, type FormEvent } from 'react'
+import { Menu } from './components/Menu'
 
 interface User {
   name: string,
@@ -52,6 +53,8 @@ function App() {
   return (
 
     <div className='flex gap-6 justify-center h-screen bg-gray-50'>
+    <Menu/>
+     
 
       <div className='w-[30%] p-20'>
         <h2 className='text-1xl mb-8 uppercase'>Cadastrar Clientes</h2>

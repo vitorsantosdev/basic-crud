@@ -2,7 +2,6 @@ import './App.css'
 import { useState, type FormEvent } from 'react'
 
 interface User {
-  // id: string,
   name: string,
   business: string,
   phone: string,
@@ -10,7 +9,6 @@ interface User {
 }
 
 function App() {
-  // const [id, setId] = useState('')
   const [name, setName] = useState('')
   const [business, setBusiness] = useState('')
   const [phone, setPhone] = useState('')
@@ -18,21 +16,18 @@ function App() {
 
   const [listUsers, setListUsers] = useState<User[]>([
     {
-      // id: '15548415',
       name: 'Vitor',
       business: 'Agência Santos',
       phone: '+351 963096155 ',
       email: 'teste@teste.br'
     },
     {
-      // id: '1554841587',
       name: 'França',
       business: 'VSVale Design',
       phone: '+55 98840-4216  ',
       email: 'teste@teste.br'
     },
     {
-      // id: '15548416',
       name: 'Semila',
       business: 'Semila Piercer',
       phone: '+351 963887147',
@@ -52,7 +47,9 @@ function App() {
   }
 
   return (
-    <div className='flex flex-col gap-2'>
+
+    <div className='flex gap-6 h-full'>
+      
       <div className='bg-gray-200 min-w-md p-12 border-1 border-gray-100 rounded-md mb-4'>
         <h1 className='font-bold text-black'>CRUD</h1>
         <form className='text-start flex flex-col justify-start' onSubmit={handleSubmit}>
@@ -74,14 +71,18 @@ function App() {
         </form>
       </div>
 
-      <b className='text-start'>Clientes</b>
-      {listUsers.map((user, index) => (
-        <div key={index}>
-          <div className='min-w-md pb-2 border-1 p-3 border-gray-200 text-start'>
-            <p><b>Nome:</b> {user.name} | {user.business} | <b>Telefone:</b> {user.phone}</p>
+      
+      <div className='text-start'>
+        <h2 className=''>Clientes</h2>
+
+        {listUsers.map((user, index) => (
+          <div key={index}>
+            <div className='w-full pb-4 pt-4 border-b-1 border-gray-100 text-start'>
+              <p><b>Nome:</b> {user.name} | {user.business} | <b>Telefone:</b> {user.phone}</p>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
 
     </div>
   )

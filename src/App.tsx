@@ -1,13 +1,35 @@
-import './App.css'
-import { useState, type FormEvent } from 'react'
-import { Menu } from './components/Menu'
+import './App.css';
+import { useEffect, useState, type FormEvent } from 'react';
+import { Menu } from './components/Menu';
+import { v4 as uuidv4 } from 'uuid';
 
 interface User {
+  id: string,
   name: string,
   business: string,
   phone: string,
   email: string,
 }
+
+const DEMO_USERS: User[] = [
+  { id: uuidv4(), name: 'Vitor', business: 'Agência Santos', phone: '+351 963096155 ', email: 'teste@teste.br' },
+  { id: uuidv4(), name: 'França', business: 'VSVale Design', phone: '+55 98840-4216  ', email: 'teste@teste.br' },
+  { id: uuidv4(), name: 'Semila', business: 'Semila Piercer', phone: '+351 963887147', email: 'teste@teste.br' },
+];
+
+const getInitialUsers = (): User[] => {
+  const dataStorage = localStorage.getItem('@users');
+
+  if (dataStorage !== null) {
+    try {
+      return JSON.parse(dataStorage) as User[];
+    } catch (e) {
+      console.error("Erro ao parsear dados do localStorage. Inicializando a lista de demonstração.", e);
+      return DEMO_USERS;
+    }
+  }
+  return DEMO_USERS;
+};
 
 function App() {
 
@@ -16,33 +38,30 @@ function App() {
   const [phone, setPhone] = useState('')
   const [email, setEmail] = useState('')
 
-  const [listUsers, setListUsers] = useState<User[]>([
-    {
-      name: 'Vitor',
-      business: 'Agência Santos',
-      phone: '+351 963096155 ',
-      email: 'teste@teste.br'
-    },
-    {
-      name: 'França',
-      business: 'VSVale Design',
-      phone: '+55 98840-4216  ',
-      email: 'teste@teste.br'
-    },
-    {
-      name: 'Semila',
-      business: 'Semila Piercer',
-      phone: '+351 963887147',
-      email: 'teste@teste.br'
-    }
-  ]);
+  const [listUsers, setListUsers] = useState<User[]>(getInitialUsers);
+
+  useEffect(() => {
+    localStorage.setItem('@users', JSON.stringify(listUsers));
+  }, [listUsers]);
 
   const updateUser = listUsers.length
+
+  function handleDelete(idToDelete: string) {
+    const updateList = listUsers.filter(user => user.id !== idToDelete);
+    setListUsers(updateList);
+  }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
     if (name.trim() && business.trim() && phone.trim() && email.trim()) {
-      setListUsers([...listUsers, { name, business, phone, email }]);
+      const newUser = {
+        id: uuidv4(),
+        name: name,
+        business: business,
+        phone: phone,
+        email: email,
+      }
+      setListUsers([...listUsers, newUser]);
       setName('');
       setBusiness('');
       setPhone('');
@@ -53,8 +72,8 @@ function App() {
   return (
 
     <div className='flex gap-6 justify-center h-screen bg-gray-50'>
-    <Menu/>
-     
+      <Menu />
+
 
       <div className='w-[30%] p-20'>
         <h2 className='text-1xl mb-8 uppercase'>Cadastrar Clientes</h2>
@@ -85,34 +104,35 @@ function App() {
         <table className='min-w-full'>
           <thead>
             <tr>
+              <th className='pb-3 text-start text-xs text-gray-400'>Id</th>
               <th className='pb-3 text-start text-xs text-gray-400'>Nome</th>
               <th className='pb-3 text-start text-xs text-gray-400'>Empresa</th>
               <th className='pb-3 text-start text-xs text-gray-400'>Telefone</th>
               <th className='pb-3 text-start text-xs text-gray-400'>Email</th>
-              <th className='pb-3 text-start text-xs text-gray-400'>Açoõs</th>
-              
+              <th className='pb-3 text-start text-xs text-gray-400'>Ações</th>
+
             </tr>
           </thead>
           <tbody>
-            
 
-        {listUsers.map((user, index) => (
-            <tr key={index}>
-              <td className=' border-gray-300 pr-5 text-gray-500 py-4'>{user.name}</td>
-              <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.business}</td>
-              <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.phone}</td>
-              <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.email}</td>
-              <td className=' px-4 border-gray-300 text-gray-500 py-4 flex'>
-                <img src="/trash.svg" alt='Deletar' className="w-6 h-6 opacity-30 hover:opacity-100" />
-                <img src="/edit.svg" alt='Editar' className="w-6 h-6 opacity-30 hover:opacity-100" />
+
+            {listUsers.map(user => (
+              <tr key={user.id} id={user.id}>
+                <td className=' border-gray-300 pr-5 text-gray-500 py-4'>{user.id}</td>
+                <td className=' border-gray-300 pr-5 text-gray-500 py-4'>{user.name}</td>
+                <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.business}</td>
+                <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.phone}</td>
+                <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.email}</td>
+                <td className=' px-4 border-gray-300 text-gray-500 py-4 flex'>
+                  <img src="/trash.svg" alt='Deletar' className="w-6 h-6 opacity-30 hover:opacity-100" onClick={() => handleDelete(user.id)} />
+                  <img src="/edit.svg" alt='Editar' className="w-6 h-6 opacity-30 hover:opacity-100" />
                 </td>
-            </tr>
-        ))}
+              </tr>
+            ))}
 
           </tbody>
         </table>
       </div>
-
     </div>
   )
 }

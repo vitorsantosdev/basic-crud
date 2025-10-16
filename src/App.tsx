@@ -1,6 +1,5 @@
 import './App.css';
 import { useEffect, useState, type FormEvent } from 'react';
-import { Menu } from './components/Menu';
 import { v4 as uuidv4 } from 'uuid';
 
 interface User {
@@ -69,71 +68,72 @@ function App() {
     }
   }
 
-  return (
-
-    <div className='flex gap-6 justify-center h-screen bg-gray-50'>
-      <Menu />
-
-
-      <div className='w-[30%] p-20'>
-        <h2 className='text-1xl mb-8 uppercase'>Cadastrar Clientes</h2>
-
-        <form className='text-stat flex flex-col justify-start' onSubmit={handleSubmit}>
-
-          <label className='text-gray-400 text-xs font-bold'>Nome:</label>
-          <input type="text" name='name' className='text-black p-3 border border-gray-300 rounded-md mb-2' value={name} onChange={(e) => setName(e.target.value)} />
-
-          <label className='text-gray-400 text-xs font-bold'>Empresa:</label>
-          <input type="text" name='name' className='text-black p-3 border border-gray-300 rounded-md mb-2' value={business} onChange={(e) => setBusiness(e.target.value)} />
-
-          <label className='text-gray-400 text-xs font-bold'>Email:</label>
-          <input type="text" name='email' className='text-black p-3 border border-gray-300 rounded-md mb-2' value={email} onChange={(e) => setEmail(e.target.value)} />
-
-          <label className='text-gray-400 text-xs font-bold'>Telefone:</label>
-          <input type="text" name='age' className='text-black p-3 border border-gray-300 rounded-md mb-2' value={phone} onChange={(e) => setPhone(e.target.value)} />
-
-          <button type='submit' className='bg-black hover:bg-gray-500 font-extrabold text-white p-3 rounded-full'>Cadastrar</button>
-
-        </form>
-      </div>
+return (
+<div>
+  <h1>Listagem de Clientes</h1>
+</div>
 
 
-      <div className='text-start w-[70%] p-20 bg-white'>
-        <h2 className='text-1xl uppercase mb-8'>Todos os Clientes (#{updateUser})</h2>
+  /*
+  <div>
+    <div>
 
-        <table className='min-w-full'>
-          <thead>
-            <tr>
-              <th className='pb-3 text-start text-xs text-gray-400'>Id</th>
-              <th className='pb-3 text-start text-xs text-gray-400'>Nome</th>
-              <th className='pb-3 text-start text-xs text-gray-400'>Empresa</th>
-              <th className='pb-3 text-start text-xs text-gray-400'>Telefone</th>
-              <th className='pb-3 text-start text-xs text-gray-400'>Email</th>
-              <th className='pb-3 text-start text-xs text-gray-400'>Ações</th>
+      <h2>Cadastrar Clientes</h2>
+      <form onSubmit={handleSubmit}>
 
-            </tr>
-          </thead>
-          <tbody>
+        <label >Nome:</label>
+        <input type="text" name='name'  value={name} onChange={(e) => setName(e.target.value)} />
 
+        <label >Empresa:</label>
+        <input type="text" name='name' value={business} onChange={(e) => setBusiness(e.target.value)} />
 
-            {listUsers.map(user => (
-              <tr key={user.id} id={user.id}>
-                <td className=' border-gray-300 pr-5 text-gray-500 py-4'>{user.id}</td>
-                <td className=' border-gray-300 pr-5 text-gray-500 py-4'>{user.name}</td>
-                <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.business}</td>
-                <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.phone}</td>
-                <td className=' px-4 border-gray-300 text-gray-500 py-4'>{user.email}</td>
-                <td className=' px-4 border-gray-300 text-gray-500 py-4 flex'>
-                  <img src="/trash.svg" alt='Deletar' className="w-6 h-6 opacity-30 hover:opacity-100" onClick={() => handleDelete(user.id)} />
-                  <img src="/edit.svg" alt='Editar' className="w-6 h-6 opacity-30 hover:opacity-100" />
-                </td>
-              </tr>
-            ))}
+        <label >Email:</label>
+        <input type="text" name='email' value={email} onChange={(e) => setEmail(e.target.value)} />
 
-          </tbody>
-        </table>
-      </div>
+        <label >Telefone:</label>
+        <input type="text" name='age' value={phone} onChange={(e) => setPhone(e.target.value)} />
+
+        <button type='submit' >Cadastrar</button>
+
+      </form>
     </div>
+
+
+    <div>
+      <h2>Todos os Clientes (#{updateUser})</h2>
+
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Empresa</th>
+            <th>Telefone</th>
+            <th>Email</th>
+            <th>Ações</th>
+
+          </tr>
+        </thead>
+        <tbody>
+
+
+          {listUsers.map(user => (
+            <tr key={user.id} id={user.id}>
+              <td>{user.name}</td>
+              <td>{user.business}</td>
+              <td>{user.phone}</td>
+              <td>{user.email}</td>
+              <td>
+                <img src="/trash.svg" alt='Deletar'  onClick={() => handleDelete(user.id)} />
+                <img src="/edit.svg" alt='Editar' />
+              </td>
+            </tr>
+          ))}
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+  */
   )
 }
 

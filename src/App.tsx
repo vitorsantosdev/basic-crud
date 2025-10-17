@@ -1,7 +1,6 @@
-import './App.css';
 import { useEffect, useState, type FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './components/ui/card';
+import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
 import { Dot, Edit, Package, Trash2 } from 'lucide-react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './components/ui/table';
 import {

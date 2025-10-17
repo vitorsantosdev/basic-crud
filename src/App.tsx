@@ -90,9 +90,29 @@ function App() {
 
       <h1 className='text-2xl'>Dashboard</h1>  
         
-      <div className='w-100 '>
-      <span className='text-gray-400 flex'><Dot className='text-green-500'></Dot>Clietes</span>
-      <h2 className='text-3xl font-semibold'>2.089</h2>
+      <div className='w-full flex justify-start gap-10'>
+
+        <div>
+          <span className='text-gray-400 flex items-center text-sm'><Dot className='text-green-500 w-8 h-8'></Dot>CLIENTES</span>
+          <h2 className='text-2xl font-semibold ml-6'>2.089</h2>
+        </div>
+
+        <div>
+          <span
+            className='text-gray-400 flex items-center text-sm'>
+              <Dot className='text-amber-400 w-8 h-8'></Dot>SERVIÇOS
+          </span>
+          <h2 className='text-2xl font-semibold ml-6'>987</h2>
+        </div>
+        
+        <div>
+          <span
+            className='text-gray-400 flex items-center text-sm'>
+              <Dot className='text-red-500 w-8 h-8'></Dot>FATURAMENTO
+          </span>
+          <h2 className='text-2xl font-semibold ml-6 '>R$ 18.197,40</h2>
+        </div>
+
       </div>
 
       <Card>

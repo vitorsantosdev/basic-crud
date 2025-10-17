@@ -1,8 +1,8 @@
 import './App.css';
 import { useEffect, useState, type FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
-import { Card, CardHeader, CardTitle, CardContent } from './components/ui/card';
-import { Trash2 } from 'lucide-react';
+import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './components/ui/card';
+import { Dot, Trash2 } from 'lucide-react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './components/ui/table';
 import {
   Dialog,
@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/dialog"
 import { Button } from './components/ui/button';
 import { Input } from "@/components/ui/input"
+import { Toaster, toast } from 'sonner'
 
 interface User {
   id: string,
@@ -84,14 +85,25 @@ function App() {
 
   return (
     <div className='w-full p-4 flex justify-center align-center'>
-      <div className='w-full max-w-[1280px]'>
+      <div className='w-full max-w-[1280px] flex flex-col gap-4'>
+        <Toaster richColors position='top-center' />
+
+      <h1 className='text-2xl'>Dashboard</h1>  
+        
+      <div className='w-100 '>
+      <span className='text-gray-400 flex'><Dot className='text-green-500'></Dot>Clietes</span>
+      <h2 className='text-3xl font-semibold'>2.089</h2>
+      </div>
+
+      <Card>
         <CardHeader>
-          <CardTitle className='flex justify-between items-center gap-2'>Todos os Clientes
+          <CardTitle className='flex justify-between items-center gap-2 text-md uppercase'>
+            Todos os Clientes
           <Dialog>
             <DialogTrigger><Button>Novo Cliente</Button></DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Adicionar Novo Cliente</DialogTitle>
+                <DialogTitle>Cadastrar Cliente</DialogTitle>
                 <DialogDescription>
                   Preencha todos os campos do cliete
                 </DialogDescription>
@@ -104,22 +116,21 @@ function App() {
                   <Input className='py-6' type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                   <Input className='py-6' type="phone" placeholder="Telefone" value={phone} onChange={(e) => setPhone(e.target.value)}/>
                   <DialogClose>
-                    <Button className='py-6' type="submit">
-                      Adicionar
+                    <Button
+                      className='py-6 ml-auto w-full' type="submit"
+                      onClick={() => toast.success("Cadastrado com Sucesso")}
+                    >
+                      Cadastrar
                     </Button>
                   </DialogClose>
                     
                 </form>
               </div>
-
-
             </DialogContent>
           </Dialog>
           </CardTitle>     
-        </CardHeader>
-      <Card>
+      </CardHeader>    
         <CardContent>
-
         <Table>
           <TableHeader>
             <TableRow>

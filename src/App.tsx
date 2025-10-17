@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState, type FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './components/ui/card';
-import { Dot, Package, Trash2 } from 'lucide-react';
+import { Dot, Edit, Package, Trash2 } from 'lucide-react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './components/ui/table';
 import {
   Dialog,
@@ -178,9 +178,12 @@ function App() {
                 <TableCell>{user.business}</TableCell>
                 <TableCell className='hidden sm:flex items-center'>{user.email}</TableCell>
                 <TableCell>{user.phone}</TableCell>
-                <TableCell className='text-right'>
+                <TableCell className='text-right flex justify-end gap-2'>
+                  <Edit
+                    className=' text-gray-300 hover:text-gray-400 transition-colors'>
+                  </Edit>
                   <Trash2
-                   className='ml-auto text-gray-300 hover:text-gray-400 transition-colors'
+                   className=' text-gray-300 hover:text-gray-400 transition-colors'
                    onClick={() => {
                     handleDelete(user.id)
                     toast.error(user.name+" removido com Sucesso!")

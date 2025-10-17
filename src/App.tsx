@@ -2,7 +2,7 @@ import './App.css';
 import { useEffect, useState, type FormEvent } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Card, CardHeader, CardTitle, CardContent, CardFooter } from './components/ui/card';
-import { Dot, Trash2 } from 'lucide-react';
+import { Dot, Package, Trash2 } from 'lucide-react';
 import { Table, TableHeader, TableRow, TableHead, TableBody, TableCell } from './components/ui/table';
 import {
   Dialog,
@@ -88,30 +88,40 @@ function App() {
       <div className='w-full max-w-[1280px] flex flex-col gap-4'>
         <Toaster richColors position='top-center' />
 
-      <h1 className='text-2xl'>Dashboard</h1>  
-        
-      <div className='w-full flex justify-start gap-10'>
+              
+      <div className='w-full flex justify-be gap-10'>
 
+        <div className='w-full flex items-center'>
+          <h1 className='text-2xl font-bold flex items-center'>
+          <Package className='bg-primary rounded-full text-primary-foreground w-7 h-7 mr-3 p-1'></Package>
+          Dashboard
+        </h1>  
+        </div>
+
+      <div className='w-full flex justify-end gap-6'>
         <div>
-          <span className='text-gray-400 flex items-center text-sm'><Dot className='text-green-500 w-8 h-8'></Dot>CLIENTES</span>
-          <h2 className='text-2xl font-semibold ml-6'>2.089</h2>
+          <span 
+          className='text-gray-400 flex items-center text-sm'>
+            <Dot className='text-green-500'></Dot>CLIENTES</span>
+            <h2 className='text-2xl font-semibold ml-3'>#00{updateUser}</h2>
         </div>
 
         <div>
           <span
             className='text-gray-400 flex items-center text-sm'>
-              <Dot className='text-amber-400 w-8 h-8'></Dot>SERVIÇOS
+              <Dot className='text-amber-400'></Dot>SERVIÇOS
           </span>
-          <h2 className='text-2xl font-semibold ml-6'>987</h2>
+          <h2 className='text-2xl font-semibold ml-2'>987</h2>
         </div>
-        
+
         <div>
           <span
             className='text-gray-400 flex items-center text-sm'>
-              <Dot className='text-red-500 w-8 h-8'></Dot>FATURAMENTO
+              <Dot className='text-red-500'></Dot>FATURAMENTO
           </span>
-          <h2 className='text-2xl font-semibold ml-6 '>R$ 18.197,40</h2>
+          <h2 className='text-2xl font-semibold ml-2'>R$ 18.197,40</h2>
         </div>
+      </div>
 
       </div>
 
@@ -138,7 +148,7 @@ function App() {
                   <DialogClose>
                     <Button
                       className='py-6 ml-auto w-full' type="submit"
-                      onClick={() => toast.success("Cadastrado com Sucesso")}
+                      onClick={() => toast.success(name+" Cadastrado com Sucesso")}
                     >
                       Cadastrar
                     </Button>
@@ -154,10 +164,10 @@ function App() {
         <Table>
           <TableHeader>
             <TableRow>
-              <TableHead className="w-[100px]">Nome</TableHead>
-              <TableHead>Empresa</TableHead>
-              <TableHead className='hidden sm:flex'>E-mail</TableHead>
-              <TableHead>Telefone</TableHead>
+              <TableHead className="w-[100px] font-semibold text-gray-400">Nome</TableHead>
+              <TableHead className='font-semibold text-gray-400'>Empresa</TableHead>
+              <TableHead className='hidden sm:flex items-center font-semibold text-gray-400'>E-mail</TableHead>
+              <TableHead className='font-semibold text-gray-400'>Telefone</TableHead>
             </TableRow>
           </TableHeader>
 
@@ -166,12 +176,15 @@ function App() {
               <TableRow key={user.id} id={user.id}>
                 <TableCell className="font-medium">{user.name}</TableCell>
                 <TableCell>{user.business}</TableCell>
-                <TableCell className='hidden sm:flex'>{user.email}</TableCell>
+                <TableCell className='hidden sm:flex items-center'>{user.email}</TableCell>
                 <TableCell>{user.phone}</TableCell>
                 <TableCell className='text-right'>
                   <Trash2
                    className='ml-auto text-gray-300 hover:text-gray-400 transition-colors'
-                   onClick={() => handleDelete(user.id)}></Trash2></TableCell>
+                   onClick={() => {
+                    handleDelete(user.id)
+                    toast.error(user.name+" removido com Sucesso!")
+                   }}></Trash2></TableCell>      
               </TableRow>
             ))}         
           </TableBody>

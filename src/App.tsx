@@ -88,7 +88,7 @@ function App() {
         <Toaster richColors position='top-center' />
 
               
-      <div className='w-full flex justify-be gap-10'>
+      <div className='w-full flex flex-col sm:flex-row justify-be gap-4'>
 
         <div className='w-full flex items-center'>
           <h1 className='text-2xl font-bold flex items-center'>
@@ -101,24 +101,34 @@ function App() {
         <div>
           <span 
           className='text-gray-400 flex items-center text-sm'>
-            <Dot className='text-green-500'></Dot>CLIENTES</span>
-            <h2 className='text-2xl font-semibold ml-3'>#00{updateUser}</h2>
+            CLIENTES
+            <Dot className='text-green-500'></Dot>            
+            </span>
+            <h2 className='text-xl md:text-2xl font-semibold'>
+              #00{updateUser}
+            </h2>
+        </div>
+
+        <div>
+          <span
+            className='text-gray-400 flex items-center text-sm'>              
+              SERVIÇOS
+              <Dot className='text-amber-400'></Dot>
+          </span>
+          <h2 className='text-xl md:text-2xl font-semibold'>
+            987
+            </h2>
         </div>
 
         <div>
           <span
             className='text-gray-400 flex items-center text-sm'>
-              <Dot className='text-amber-400'></Dot>SERVIÇOS
+               FATURAMENTO
+              <Dot className='text-red-500'></Dot>              
           </span>
-          <h2 className='text-2xl font-semibold ml-2'>987</h2>
-        </div>
-
-        <div>
-          <span
-            className='text-gray-400 flex items-center text-sm'>
-              <Dot className='text-red-500'></Dot>FATURAMENTO
-          </span>
-          <h2 className='text-2xl font-semibold ml-2'>R$ 18.197,40</h2>
+          <h2 className='text-xl md:text-2xl font-semibold'>
+            R$ 18.197,40
+          </h2>
         </div>
       </div>
 
@@ -129,7 +139,9 @@ function App() {
           <CardTitle className='flex justify-between items-center gap-2 text-md uppercase'>
             Todos os Clientes
           <Dialog>
-            <DialogTrigger><Button>Novo Cliente</Button></DialogTrigger>
+            <DialogTrigger>
+              <Button
+              className='border hover:bg-transparent hover:text-gray-500 hover:border-gray-500'>Cadastrar Cliente</Button></DialogTrigger>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle>Cadastrar Cliente</DialogTitle>
@@ -179,10 +191,10 @@ function App() {
                 <TableCell>{user.phone}</TableCell>
                 <TableCell className='text-right flex justify-end gap-2'>
                   <Edit
-                    className=' text-gray-300 hover:text-gray-400 transition-colors'>
+                    className=' text-gray-300 hover:text-amber-200 transition-colors'>
                   </Edit>
                   <Trash2
-                   className=' text-gray-300 hover:text-gray-400 transition-colors'
+                   className=' text-gray-300 hover:text-red-300 transition-colors'
                    onClick={() => {
                     handleDelete(user.id)
                     toast.error(user.name+" removido com Sucesso!")
